@@ -18,7 +18,7 @@ function OrdersManager() {
     const [duration, setDuration] = React.useState<number | undefined>(undefined);
     const [name, setName] = React.useState<string>("");
     const [orders, setOrders] = React.useState<Order[]>([]);
-
+    const timers = React.useRef<{ [key: string]: ReturnType<typeof setTimeout> }>({});
     const handleAddOrderClick = () => {
         if (duration && name) {
             const newOrder: Order = {
@@ -27,20 +27,31 @@ function OrdersManager() {
                 duration,
                 status: STATUS.progress
             };
-            setOrders((prev)=> [...prev, newOrder]);
+            setOrders((prev) => [...prev, newOrder]);
             setName('');
             setDuration(undefined);
 
-            setTimeout(()=>{
-                setOrders((prev)=> prev.map((o)=> o.id === newOrder.id ? {...o, status: STATUS.done} : o));
-            },newOrder.duration*1000)
+            const timer = setTimeout(() => {
+                setOrders((prev) => prev.map((o) => o.id === newOrder.id ? { ...o, status: STATUS.done } : o));
+                // Remove the reference to the completed timer
+                delete timers.current[newOrder.id];
+            }, newOrder.duration * 1000);
+
+            timers.current[newOrder.id] = timer;
         }
-    }
+    };
+
+    React.useEffect(() => {
+        // Cleanup function to clear timeouts
+        return () => {
+            Object.values(timers.current).forEach(clearTimeout);
+        };
+    }, []);
 
     return (
         <div>
             <h1>Orders Manager</h1>
-            <div  className="order-form-container">
+            <div className="order-form-container">
                 <h2>New Order</h2>
                 <div className="order-form">
                     <select
@@ -53,8 +64,9 @@ function OrdersManager() {
                         <option className="order-form-time-option" value={2}>2 sec</option>
                         <option className="order-form-time-option" value={3}>3 sec</option>
                         <option className="order-form-time-option" value={10}>10 sec</option>
+                        <option className="order-form-time-option" value={40}>40 sec</option>
                     </select>
-                    <input value={name} onChange={(e)=>setName(e.target.value)} className="order-form-name" type="text" placeholder="Order Title"/>
+                    <input value={name} onChange={(e) => setName(e.target.value)} className="order-form-name" type="text" placeholder="Order Title" />
                     <button disabled={!duration || !name} onClick={handleAddOrderClick} className="order-form-button">Add order</button>
                 </div>
             </div>
@@ -64,19 +76,19 @@ function OrdersManager() {
                     <div className="orders-box">
                         <h3>in progress</h3>
                         <ul className="orders-box-ul">
-                            {orders.filter((order)=> order.status === STATUS.progress).map(({id, name}) => <li key={id} className="orders-box-li">{name}</li>)}
+                            {orders.filter((order) => order.status === STATUS.progress).map(({ id, name }) => <li key={id} className="orders-box-li">{name}</li>)}
                         </ul>
                     </div>
                     <div className="orders-box">
                         <h3>completed</h3>
                         <ul className="orders-box-ul">
-                            {orders.filter((order)=> order.status === STATUS.done).map(({id, name}) => <li key={id} className="orders-box-li">{name}</li>)}
+                            {orders.filter((order) => order.status === STATUS.done).map(({ id, name }) => <li key={id} className="orders-box-li">{name}</li>)}
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default OrdersManager;
