@@ -1,0 +1,80 @@
+.order-form-container,
+.current-orders-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    margin: 1rem auto; /* Add margin and center horizontally */
+    padding: 1rem; /* Add some padding */
+    border-radius: 5px; /* Add rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+h1, h2 {
+    margin: 0 0 1rem; /* Add some margin for headings */
+    font-size: 1.2rem; /* Set font size for headings */
+    font-weight: bold; /* Make headings bold */
+}
+
+.order-form {
+    display: flex; /* Make form elements display inline */
+    align-items: center; /* Vertically center elements */
+    margin: 1rem 0; /* Add some margin */
+    padding: 0.5rem 1rem; /* Adjust padding slightly */
+}
+
+.order-form select,
+.order-form input[type="text"] {
+    border: 1px solid #ccc; /* Light border for both elements */
+    border-radius: 3px; /* Add rounded corners to input and select */
+    padding: 0.5rem 1rem; /* Add some padding */
+    font-size: 1rem; /* Set font size */
+    outline: none; /* Remove default outline on focus */
+}
+
+.order-form select {
+    margin-right: 1rem; /* Add margin between select and input */
+}
+
+.order-form input[type="text"] {
+    flex: 1; /* Allow input to fill remaining space */
+}
+
+.current-orders-container {
+    margin-top: 2rem; /* Add some space between sections */
+}
+
+.orders-box-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+.orders-box {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    padding: 1rem; /* Add some padding */
+    border-radius: 5px; /* Add rounded corners */
+    background-color: rgba(43, 44, 45, 0.84); /* Light gray background */
+    flex: 1; /* Make boxes take up remaining space proportionally */
+    margin: 0.5rem; /* Adjust margin for spacing between boxes */
+}
+
+.orders-box h3 {
+    margin-bottom: 0.5rem; /* Add some margin for subheading */
+    font-size: 1rem; /* Set font size for subheading */
+}
+
+.orders-box-ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.orders-box-li {
+    margin-bottom: 0.5rem; /* Add some margin between list items */
+    padding: 0.5rem 1rem; /* Add some padding */
+    border-radius: 3px; /* Add rounded corners to list items */
+    background-color: #e0aa20; /* Light gray background for list items */
+    cursor: pointer; /* Indicate clickable items (optional) */
+}
