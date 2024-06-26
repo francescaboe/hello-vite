@@ -29,6 +29,7 @@ h1, h2 {
     padding: 0.5rem 1rem; /* Add some padding */
     font-size: 1rem; /* Set font size */
     outline: none; /* Remove default outline on focus */
+    margin-right: 1rem;
 }
 
 .order-form select {
@@ -37,6 +38,13 @@ h1, h2 {
 
 .order-form input[type="text"] {
     flex: 1; /* Allow input to fill remaining space */
+}
+
+.order-form-button {
+    padding: 0.5rem 1rem; /* Add some padding */
+    border-radius: 3px; /* Add rounded corners to list items */
+    background-color: rgba(99, 204, 204, 0.97); /* Light gray background for list items */
+    cursor: pointer; /* Indicate clickable items (optional) */
 }
 
 .current-orders-container {
