@@ -21,7 +21,6 @@ function TodoAdd({ onAddClick, position }: TodoAddProps){
                 <button
                     style={{borderColor: 'green', marginRight: '2px'}}
                     type="submit">Add</button>
-                <button style={{borderColor: 'orange'}} type="reset">Discharge</button>
             </div>
         </form>
     )
