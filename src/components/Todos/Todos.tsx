@@ -83,6 +83,11 @@ function Todos(){
 
     },[])
 
+    const onDeleteClick = React.useCallback((e:React.MouseEvent<HTMLSpanElement>) => {
+        const id = e.currentTarget.id;
+        setTodos((prev)=> prev.filter(t => t.id !== id))
+    },[])
+
 
     return (
         <section>
@@ -97,6 +102,7 @@ function Todos(){
                         checked={checked}
                         onTaskToggle={onTaskToggle}
                         onTaskSave={onTaskEditSave}
+                        onDeleteClick={onDeleteClick}
                     />
                     )}
             </ul>
