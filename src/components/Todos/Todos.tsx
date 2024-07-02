@@ -1,6 +1,7 @@
 import React from "react";
 import {v4 as uuid} from "uuid";
-import TodoItem from "./TodoItem/TodoItem.tsx";
+import TodoItem from "./TodoItem";
+import TodoAdd from "./TodoAdd";
 const initialData: Todo[] = [
     {
         id: uuid(),
@@ -52,10 +53,41 @@ function Todos(){
 
     },[])
 
+    const onTaskAddClick = React.useCallback((e: React.FormEvent<HTMLFormElement>)=> {
+        e.preventDefault();
+        const form = e.currentTarget as HTMLFormElement;
+        const position = form.id;
+        const input = form.elements[0] as HTMLInputElement;
+        const label = input.value;
+
+        setTodos((prevTodos) => {
+            return position === 'top' ? [
+                {
+                    id: uuid(),
+                    label,
+                    checked: false
+                },
+                ...prevTodos
+            ] : [
+                ...prevTodos,
+                {
+                    id: uuid(),
+                    label,
+                    checked: false
+                }
+            ]
+        })
+
+        form.reset();
+
+
+    },[])
+
 
     return (
         <section>
             <h1>Todos</h1>
+            <TodoAdd onAddClick={onTaskAddClick} position="top"/>
             <ul style={{display: 'flex', flexDirection: 'column'}}>
                 {todos.map(({id, label, checked}: Todo) =>
                     <TodoItem
@@ -68,6 +100,7 @@ function Todos(){
                     />
                     )}
             </ul>
+            <TodoAdd onAddClick={onTaskAddClick} position="bottom"/>
         </section>
     )
 }
