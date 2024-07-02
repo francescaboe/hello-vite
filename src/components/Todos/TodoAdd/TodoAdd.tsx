@@ -59,7 +59,7 @@ function TodoAdd({ onAddClick, position }: TodoAddProps){
             <div>
                 <button
                     disabled={isDisabled}
-                    style={{borderColor: 'green', marginRight: '2px'}}
+                    style={{borderColor: 'green', marginRight: '2px', width: '75px'}}
                     type="submit">Add</button>
             </div>
         </form>

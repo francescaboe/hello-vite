@@ -26,7 +26,7 @@ function TodoItem({ id, label, checked, onTaskToggle, onTaskSave, onDeleteClick 
     }
 
     return (
-        <li key={id} style={{display:'flex', alignItems: 'baseline', justifyContent: 'left', width: '300px'}}>
+        <li key={id} style={{display:'flex', alignItems: 'baseline', justifyContent: 'left', width: '380px'}}>
             {isEdit
                 ? <>
                     <input
@@ -39,11 +39,11 @@ function TodoItem({ id, label, checked, onTaskToggle, onTaskSave, onDeleteClick 
                     />
                     <div>
                         <button
-                            style={{borderColor: 'green', marginRight: '2px'}}
+                            style={{borderColor: 'green', marginRight: '2px', width: '75px'}}
                             onClick={onSaveClick}
                             disabled={labelText.trim() === ''}
                         >Save</button>
-                        <button style={{borderColor: 'orange'}} onClick={onEditClick}>Discharge</button>
+                        <button style={{borderColor: 'orange', width: '75px'}} onClick={onEditClick}>Discharge</button>
                     </div>
                 </>
                 :
@@ -68,8 +68,8 @@ function TodoItem({ id, label, checked, onTaskToggle, onTaskSave, onDeleteClick 
                         onClick={onTaskToggle}
                     >{label}</span>
                     <div>
-                        <button style={{borderColor: 'blue', marginRight: '2px'}} onClick={onEditClick}>Edit</button>
-                        <button style={{borderColor: 'red'}} id={id} onClick={onDeleteClick}>Delete</button>
+                        <button style={{borderColor: 'blue', marginRight: '2px', width: '75px'}} onClick={onEditClick}>Edit</button>
+                        <button style={{borderColor: 'red', width: '75px'}} id={id} onClick={onDeleteClick}>Delete</button>
                     </div>
                 </>
             }
