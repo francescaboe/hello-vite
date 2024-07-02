@@ -28,7 +28,7 @@ const initialData: Todo[] = [
 function Todos(){
     const [todos, setTodos] = React.useState<Todo[]>(initialData);
 
-    const onTaskClick = React.useCallback((e:React.MouseEvent<HTMLSpanElement>) => {
+    const onTaskToggle = React.useCallback((e:React.MouseEvent<HTMLSpanElement>) => {
         const id = e.currentTarget.id;
 
         setTodos((prevTodos) => {
@@ -63,7 +63,7 @@ function Todos(){
                         id={id}
                         label={label}
                         checked={checked}
-                        onTaskClick={onTaskClick}
+                        onTaskToggle={onTaskToggle}
                         onTaskSave={onTaskEditSave}
                     />
                     )}

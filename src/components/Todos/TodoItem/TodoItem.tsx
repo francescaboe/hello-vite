@@ -1,12 +1,12 @@
 import React from "react";
 
 export interface TodoItemProps extends Todo {
-    onTaskClick: (event: React.MouseEvent<HTMLSpanElement>) => void;
+    onTaskToggle: (event: React.MouseEvent<HTMLSpanElement>) => void;
     onTaskSave: (label: string, id: string) => void;
 }
 
 
-function TodoItem({ id, label, checked, onTaskClick, onTaskSave }: TodoItemProps) {
+function TodoItem({ id, label, checked, onTaskToggle, onTaskSave }: TodoItemProps) {
     const [isEdit, setIsEdit] = React.useState<boolean>(false);
     const [labelText, setLabelText] = React.useState(label);
 
@@ -63,7 +63,7 @@ function TodoItem({ id, label, checked, onTaskClick, onTaskSave }: TodoItemProps
                             marginRight: '5px'
                         }}
                         id={id}
-                        onClick={onTaskClick}
+                        onClick={onTaskToggle}
                     >{label}</span>
                     <div>
                         <button style={{borderColor: 'blue', marginRight: '2px'}} onClick={onEditClick}>Edit</button>
