@@ -54,7 +54,6 @@ function Todos(){
     },[])
 
     const onTaskAddClick = React.useCallback((e: React.FormEvent<HTMLFormElement>)=> {
-        e.preventDefault();
         const form = e.currentTarget as HTMLFormElement;
         const position = form.id;
         const input = form.elements[0] as HTMLInputElement;
@@ -77,8 +76,6 @@ function Todos(){
                 }
             ]
         })
-
-        form.reset();
 
 
     },[])
