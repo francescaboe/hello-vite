@@ -40,10 +40,23 @@ function Todos(){
         })
 
     },[])
+
+    const onTaskEditSave = React.useCallback((label: string, id: string) => {
+        setTodos((prevTodos) => {
+            return prevTodos.map(t =>
+                t.id === id
+                    ? {...t, label}
+                    : t
+            )
+        })
+
+    },[])
+
+
     return (
         <section>
             <h1>Todos</h1>
-            <ul>
+            <ul style={{display: 'flex', flexDirection: 'column'}}>
                 {todos.map(({id, label, checked}: Todo) =>
                     <TodoItem
                         key={id}
@@ -51,6 +64,7 @@ function Todos(){
                         label={label}
                         checked={checked}
                         onTaskClick={onTaskClick}
+                        onTaskSave={onTaskEditSave}
                     />
                     )}
             </ul>

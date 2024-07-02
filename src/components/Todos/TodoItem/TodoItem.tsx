@@ -2,18 +2,24 @@ import React from "react";
 
 export interface TodoItemProps extends Todo {
     onTaskClick: (event: React.MouseEvent<HTMLSpanElement>) => void;
+    onTaskSave: (label: string, id: string) => void;
 }
 
 
-function TodoItem({ id, label, checked, onTaskClick }: TodoItemProps) {
+function TodoItem({ id, label, checked, onTaskClick, onTaskSave }: TodoItemProps) {
     const [isEdit, setIsEdit] = React.useState<boolean>(false);
+    const [labelText, setLabelText] = React.useState(label);
 
     const onEditClick = () => {
         setIsEdit((prev)=> !prev);
     }
 
+    const onLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setLabelText(e.target.value)
+    }
+
     const onSaveClick = () => {
-        // save changes
+        onTaskSave(labelText, id);
         setIsEdit((prev)=> !prev);
     }
 
@@ -22,18 +28,21 @@ function TodoItem({ id, label, checked, onTaskClick }: TodoItemProps) {
     }
 
     return (
-        <li key={id} style={{display:'flex', alignItems: 'center', margin: '5px'}}>
+        <li key={id} style={{display:'flex', alignItems: 'baseline', justifyContent: 'left', width: '300px'}}>
             {isEdit
                 ? <>
                     <input
-                        style={{textDecoration: checked ? 'line-through' : 'none'}}
+                        style={{textDecoration: checked ? 'line-through' : 'none', marginRight: '5px'}}
                         type="text"
-                        value={label}
+                        value={labelText}
+                        onChange={onLabelChange}
                         disabled={!isEdit}
                         autoFocus
                     />
-                    <button style={{borderColor: 'green'}} onClick={onSaveClick}>Save</button>
-                    <button style={{borderColor: 'orange'}} onClick={onEditClick}>Discharge</button>
+                    <div>
+                        <button style={{borderColor: 'green', marginRight: '2px'}} onClick={onSaveClick}>Save</button>
+                        <button style={{borderColor: 'orange'}} onClick={onEditClick}>Discharge</button>
+                    </div>
                 </>
                 :
                 <>
@@ -50,15 +59,16 @@ function TodoItem({ id, label, checked, onTaskClick }: TodoItemProps) {
                             height: '19px',
                             fontSize: '13px',
                             textAlign: 'left',
-                            padding: '0 2px'
+                            padding: '0 2px',
+                            marginRight: '5px'
                         }}
                         id={id}
                         onClick={onTaskClick}
-                    >
-  {label}
-</span>
-                    <button style={{borderColor: 'blue'}} onClick={onEditClick}>Edit</button>
-                    <button style={{borderColor: 'red'}} onClick={onDeleteClick}>Delete</button>
+                    >{label}</span>
+                    <div>
+                        <button style={{borderColor: 'blue', marginRight: '2px'}} onClick={onEditClick}>Edit</button>
+                        <button style={{borderColor: 'red'}} onClick={onDeleteClick}>Delete</button>
+                    </div>
                 </>
             }
         </li>
