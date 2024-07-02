@@ -13,6 +13,7 @@ function TodoItem({ id, label, checked, onTaskToggle, onTaskSave, onDeleteClick 
 
     const onEditClick = () => {
         setIsEdit((prev)=> !prev);
+        setLabelText(label);
     }
 
     const onLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +38,11 @@ function TodoItem({ id, label, checked, onTaskToggle, onTaskSave, onDeleteClick 
                         autoFocus
                     />
                     <div>
-                        <button style={{borderColor: 'green', marginRight: '2px'}} onClick={onSaveClick}>Save</button>
+                        <button
+                            style={{borderColor: 'green', marginRight: '2px'}}
+                            onClick={onSaveClick}
+                            disabled={labelText.trim() === ''}
+                        >Save</button>
                         <button style={{borderColor: 'orange'}} onClick={onEditClick}>Discharge</button>
                     </div>
                 </>

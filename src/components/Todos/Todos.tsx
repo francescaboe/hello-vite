@@ -88,7 +88,7 @@ function Todos(){
 
     return (
         <section>
-            <h1>Todos</h1>
+            <h1>TODOs</h1>
             <TodoAdd onAddClick={onTaskAddClick} position="top"/>
             <ul style={{display: 'flex', flexDirection: 'column'}}>
                 {todos.map(({id, label, checked}: Todo) =>
